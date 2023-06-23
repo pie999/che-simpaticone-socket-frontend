@@ -94,11 +94,13 @@ function App() {
     );
   else if (state === "lobby")
     content = (
-      <div className="lobby-div">
+      <div>
         <h1>utenti online</h1>
-        {users.map((u, i) => (
-          <p key={i}>{u.name}</p>
-        ))}
+        <div className="online-users">
+          {users.map((u, i) => (
+            <p key={i}>{u.name}</p>
+          ))}
+        </div>
 
         <h1>lobbies</h1>
         {!isInLobby && !showLobbyForm && (
@@ -108,7 +110,7 @@ function App() {
         )}
         {showLobbyForm && (
           <form onSubmit={(e) => handleLobbySubmit(e)}>
-            <label htmlFor="lobby">crea una nuova lobby</label>
+            <label htmlFor="lobby">nome lobby</label>
             <input
               id="lobby"
               value={lobbyName}
@@ -120,24 +122,43 @@ function App() {
         )}
         {lobbies.map((lobby, index) => {
           return (
-            <div key={index}>
-              <h2>{lobby.name}</h2>
-              {!userInLobby(index) && (
-                <button onClick={() => handleLobbyJoin(lobby.name)}>
-                  entra
-                </button>
-              )}
-              {userInLobby(index) && (
-                <button onClick={() => handleLobbyExit(index)}>esci</button>
-              )}
-              {lobby.users.map((user) => (
-                <p key={user.id}>
-                  {user.name} {lobby.ownerId === user.id && "👑"}
-                </p>
-              ))}
-              {userInLobby(index) && lobby.ownerId === socket.id && (
-                <button onClick={() => handleGameStart(index)}>inizia!</button>
-              )}
+            <div key={index} className="lobby-list">
+              <div className="lobby-div">
+                <div className="lobby-top">
+                  <h2>{lobby.name}</h2>
+                  {!userInLobby(index) && (
+                    <button
+                      className="join"
+                      onClick={() => handleLobbyJoin(lobby.name)}
+                    >
+                      entra
+                    </button>
+                  )}
+                  {userInLobby(index) && (
+                    <button
+                      className="exit"
+                      onClick={() => handleLobbyExit(index)}
+                    >
+                      esci
+                    </button>
+                  )}
+                </div>
+                <div className="lobby-users">
+                  {lobby.users.map((user) => (
+                    <p key={user.id}>
+                      {user.name} {lobby.ownerId === user.id && "👑"}
+                    </p>
+                  ))}
+                </div>
+                {userInLobby(index) && lobby.ownerId === socket.id && (
+                  <button
+                    className="start"
+                    onClick={() => handleGameStart(index)}
+                  >
+                    inizia!
+                  </button>
+                )}
+              </div>
             </div>
           );
         })}

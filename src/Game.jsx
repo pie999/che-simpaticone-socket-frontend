@@ -29,7 +29,7 @@ function Game({ startLobby }) {
     content = <Reveal lobby={lobby} />;
   }
 
-  return content;
+  return <div className="game-content-div">{content}</div>;
 }
 
 export default Game;

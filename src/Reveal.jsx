@@ -20,12 +20,15 @@ function Reveal({ lobby }) {
 
   return (
     <>
-      <h1>reveal</h1>
+      <h1>risultati round</h1>
       {lobby.users.map((u, i) => {
         return (
-          <p key={i}>
-            {u.name}: {u.answer} +{u.currentScore}
-          </p>
+          <div className="answer-reveal" key={i}>
+            <h2>
+              {u.name} +{u.currentScore}
+            </h2>
+            <p>{u.answer}</p>
+          </div>
         );
       })}
     </>

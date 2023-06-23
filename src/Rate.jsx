@@ -38,22 +38,24 @@ function Rate({ lobby }) {
   }, [hasTimeoutElapsed, votedIndex, lobby]);
 
   return (
-    <>
-      <h1>rate</h1>
+    <div className="rate-div">
+      <h1>scegli la risposta più simpatica</h1>
       {lobby.users.map((u, i) => {
         if (u.id !== socket.id) {
           return (
             <button
+              className={`user-answer ${
+                i === votedIndex ? "selected-answer" : ""
+              }`}
               key={i}
               onClick={() => setVotedIndex(i)}
-              style={{ border: i === votedIndex ? "3px solid black" : "" }}
             >
               {u.answer}
             </button>
           );
         }
       })}
-    </>
+    </div>
   );
 }
 
