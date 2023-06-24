@@ -1,22 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
 import { socket } from "../socket";
 
 function Reveal({ lobby }) {
-  const [hasTimeoutElapsed, setHasTimeoutElapsed] = useState(false);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setHasTimeoutElapsed(true);
-  //   }, 5000);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (hasTimeoutElapsed) {
-  //     socket.emit("submit-answer", answer, lobby);
-  //     setHasTimeoutElapsed(false);
-  //   }
-  // }, [hasTimeoutElapsed, answer, lobby]);
+  function handleNextRound() {
+    socket.emit("next-round", lobby);
+  }
 
   return (
     <>
@@ -31,6 +19,11 @@ function Reveal({ lobby }) {
           </div>
         );
       })}
+      {lobby.ownerId === socket.id && (
+        <button className="next-round-but" onClick={handleNextRound}>
+          prossimo round
+        </button>
+      )}
     </>
   );
 }

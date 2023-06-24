@@ -32,11 +32,14 @@ function App() {
       setUsers([...usersArr]);
       setLobbies([...lobbiesArr]);
     });
-    socket.on("game-start", (lobbiesArr, lobbyIndex) => {
-      console.log(lobbiesArr[lobbyIndex]);
-      setStartLobby(lobbiesArr[lobbyIndex]);
+    socket.on("game-start", (upLobby) => {
+      setStartLobby(upLobby);
       setState("game");
-      socket.emit("join-room", lobbyIndex);
+      socket.emit("join-room", upLobby);
+    });
+    socket.on("end-lobby", (lobby) => {
+      setState("lobby");
+      socket.emit("leave-room", lobby);
     });
   }, []);
 
@@ -73,7 +76,7 @@ function App() {
   }
 
   function handleGameStart(lobbyIndex) {
-    socket.emit("game-start", lobbyIndex);
+    socket.emit("game-start", lobbies[lobbyIndex]);
   }
 
   let content;
