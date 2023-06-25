@@ -2,15 +2,22 @@
 import { useState, useEffect } from "react";
 import { socket } from "../socket";
 
+const timeSeconds = 30;
+
 function Answer({ lobby }) {
   const [answer, setAnswer] = useState("");
+  const [time, setTime] = useState(timeSeconds * 1000);
+  const [timeEnd] = useState(Date.now() + timeSeconds * 1000);
   const [hasTimeoutElapsed, setHasTimeoutElapsed] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    if (time > 1) {
+      const timer = setTimeout(() => setTime(timeEnd - Date.now()), 1000);
+      return () => clearTimeout(timer);
+    } else {
       setHasTimeoutElapsed(true);
-    }, 10000);
-  }, []);
+    }
+  }, [time, timeEnd]);
 
   useEffect(() => {
     if (hasTimeoutElapsed) {
@@ -21,6 +28,7 @@ function Answer({ lobby }) {
 
   return (
     <div className="answer-div">
+      <p>tempo: {Math.floor(time / 1000)}</p>
       <h1 className="answer-prompt">
         descrivi la tua giornata in quattro parole
       </h1>
