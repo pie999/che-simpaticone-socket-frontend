@@ -10,14 +10,32 @@ function App() {
   const [lobbyName, setLobbyName] = useState("");
   const [lobbies, setLobbies] = useState([]);
   const [startLobby, setStartLobby] = useState();
+  const [usernameExists, setUsernameExists] = useState(false);
+  const [lobbynameExists, setLobbynameExists] = useState(false);
 
   const [isInLobby, setIsInLobby] = useState(false);
   const [showLobbyForm, setshowLobbyForm] = useState(false);
 
   useEffect(() => {
+    socket.on("username-exists", () => {
+      setUsernameExists(true);
+    });
+    socket.on("join-successful", () => {
+      setState("lobby");
+      setUsernameExists(false);
+    });
     socket.on("new-user", (usersArr, lobbiesArr) => {
       setUsers([...usersArr]);
       setLobbies([...lobbiesArr]);
+    });
+    socket.on("lobbyname-exists", () => {
+      setLobbynameExists(true);
+    });
+    socket.on("create-lobby-successful", () => {
+      setLobbyName("");
+      setLobbynameExists(false);
+      setIsInLobby(true);
+      setshowLobbyForm(false);
     });
     socket.on("new-lobby", (lobbiesArr) => {
       setLobbies([...lobbiesArr]);
@@ -45,19 +63,12 @@ function App() {
 
   function handleUsernameSubmit(e) {
     e.preventDefault();
-    setState("lobby");
-    const newUser = { id: socket.id, name: username };
-    socket.emit("new-user", newUser);
+    socket.emit("new-user", username);
   }
 
   function handleLobbySubmit(e) {
     e.preventDefault();
-    setLobbyName(""); // remember that values change at new render
-    setIsInLobby(true);
-    setshowLobbyForm(false);
-    const user = users.find((user) => user.id === socket.id);
-    const newLobby = { name: lobbyName, ownerId: socket.id, users: [user] };
-    socket.emit("new-lobby", newLobby);
+    socket.emit("new-lobby", lobbyName);
   }
 
   function handleLobbyJoin(lobbyName) {
@@ -91,6 +102,7 @@ function App() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {usernameExists && <p>nickname già in uso</p>}
           <button type="submit">entra</button>
         </form>
       </div>
@@ -121,6 +133,7 @@ function App() {
             />
             <button type="submit">crea</button>
             <button onClick={() => setshowLobbyForm(false)}>annulla</button>
+            {lobbynameExists && <p>nome lobby già in uso</p>}
           </form>
         )}
         {lobbies.map((lobby, index) => {
