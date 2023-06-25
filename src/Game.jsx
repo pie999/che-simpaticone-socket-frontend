@@ -19,13 +19,15 @@ function Game({ startLobby }) {
       setLobby(upLobby);
       setPhase("reveal");
     });
-    socket.on("next-round", () => {
+    socket.on("next-round", (upLobby) => {
+      setLobby(upLobby);
       setPhase("answer");
     });
     socket.on("game-over", () => {
       setPhase("over");
     });
-    socket.on("game-start", () => {
+    socket.on("game-start", (upLobby) => {
+      setLobby(upLobby);
       setPhase("answer");
     });
   }, []);

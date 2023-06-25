@@ -29,15 +29,15 @@ function Answer({ lobby }) {
   return (
     <div className="answer-div">
       <p>tempo: {Math.floor(time / 1000)}</p>
-      <h1 className="answer-prompt">
-        descrivi la tua giornata in quattro parole
-      </h1>
+      <h1 className="answer-prompt">{lobby.prompt}</h1>
       <textarea
-        className="answer-area"
-        maxLength="150"
-        rows="3"
+        placeholder={lobby.letter}
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
+        className="answer-area"
+        spellCheck="false"
+        maxLength="150"
+        rows="3"
       ></textarea>
     </div>
   );

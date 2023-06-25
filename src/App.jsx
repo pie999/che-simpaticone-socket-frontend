@@ -63,11 +63,13 @@ function App() {
 
   function handleUsernameSubmit(e) {
     e.preventDefault();
+    if (username === "") return;
     socket.emit("new-user", username);
   }
 
   function handleLobbySubmit(e) {
     e.preventDefault();
+    if (lobbyName === "") return;
     socket.emit("new-lobby", lobbyName);
   }
 

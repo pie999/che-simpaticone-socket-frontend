@@ -11,7 +11,7 @@ function getRandomNumberExcluding(n, i) {
   return randomNumber;
 }
 
-const timeSeconds = 30;
+const timeSeconds = 10;
 
 function Rate({ lobby }) {
   const [votedIndex, setVotedIndex] = useState();
