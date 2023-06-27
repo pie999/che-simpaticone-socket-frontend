@@ -8,7 +8,7 @@ function Over({ lobby }) {
       {lobby.users.map((u, i) => {
         return (
           <h2 key={i}>
-            {u.totalScore}p {u.name}
+            {u.totalScore} {u.name}
           </h2>
         );
       })}
