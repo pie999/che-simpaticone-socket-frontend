@@ -11,12 +11,10 @@ function getRandomNumberExcluding(n, i) {
   return randomNumber;
 }
 
-const timeSeconds = 10;
-
 function Rate({ lobby }) {
   const [votedIndex, setVotedIndex] = useState();
-  const [time, setTime] = useState(timeSeconds * 1000);
-  const [timeEnd] = useState(Date.now() + timeSeconds * 1000);
+  const [time, setTime] = useState((lobby.users.length - 1) * 4 * 1000);
+  const [timeEnd] = useState(Date.now() + time);
   const [hasTimeoutElapsed, setHasTimeoutElapsed] = useState(false);
 
   useEffect(() => {
