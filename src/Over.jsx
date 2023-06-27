@@ -3,24 +3,32 @@ import { socket } from "../socket";
 
 function Over({ lobby }) {
   return (
-    <>
+    <div className="final">
       <h1>classifica finale</h1>
       {lobby.users.map((u, i) => {
         return (
-          <p key={i}>
-            {u.totalScore} {u.name}
-          </p>
+          <h2 key={i}>
+            {u.totalScore}p {u.name}
+          </h2>
         );
       })}
       {lobby.ownerId === socket.id && (
         <>
-          <button onClick={() => socket.emit("game-start", lobby)}>
+          <button
+            className="new-game"
+            onClick={() => socket.emit("game-start", lobby)}
+          >
             nuova partita
           </button>
-          <button onClick={() => socket.emit("end-lobby", lobby)}>esci</button>
+          <button
+            className="exit"
+            onClick={() => socket.emit("end-lobby", lobby)}
+          >
+            esci
+          </button>
         </>
       )}
-    </>
+    </div>
   );
 }
 

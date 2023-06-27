@@ -12,12 +12,16 @@
 
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #root {
-  height: 100vh;
   margin: auto;
   width: fit-content;
+}
+
+button {
+  cursor: pointer;
 }
 
 .name-div {
@@ -117,7 +121,8 @@ input#lobby {
 
 .answer-area {
   width: 100%;
-  font-size: 15px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* RATE */
@@ -147,4 +152,21 @@ input#lobby {
 
 .answer-reveal p {
   margin-top: 0;
+}
+
+/* OVER */
+
+.final button {
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.final .new-game {
+  background-color: #94ffa2;
+  margin-right: 10px;
+}
+
+.final .exit {
+  background-color: #ffa0a0;
 }
