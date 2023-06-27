@@ -20,7 +20,7 @@ function Rate({ lobby }) {
   const [hasTimeoutElapsed, setHasTimeoutElapsed] = useState(false);
 
   useEffect(() => {
-    if (time > 1) {
+    if (time > 0) {
       const timer = setTimeout(() => setTime(timeEnd - Date.now()), 1000);
       return () => clearTimeout(timer);
     } else {
@@ -46,7 +46,7 @@ function Rate({ lobby }) {
 
   return (
     <div className="rate-div">
-      <p>tempo: {Math.floor(time / 1000)}</p>
+      <p>tempo: {Math.round(time / 1000)}</p>
       <h1>scegli la risposta più simpatica</h1>
       {lobby.users.map((u, i) => {
         if (u.id !== socket.id) {

@@ -11,7 +11,7 @@ function Answer({ lobby }) {
   const [hasTimeoutElapsed, setHasTimeoutElapsed] = useState(false);
 
   useEffect(() => {
-    if (time > 1) {
+    if (time > 0) {
       const timer = setTimeout(() => setTime(timeEnd - Date.now()), 1000);
       return () => clearTimeout(timer);
     } else {
@@ -28,7 +28,7 @@ function Answer({ lobby }) {
 
   return (
     <div className="answer-div">
-      <p>tempo: {Math.floor(time / 1000)}</p>
+      <p>tempo: {Math.round(time / 1000)}</p>
       <h1 className="answer-prompt">{lobby.prompt}</h1>
       <textarea
         placeholder={lobby.letter}
