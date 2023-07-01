@@ -102,6 +102,7 @@ function App() {
           <label htmlFor="username">nickname</label>
           <input
             id="username"
+            maxLength={15}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
