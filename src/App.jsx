@@ -51,12 +51,16 @@ function App() {
       setUsers([...usersArr]);
       setLobbies([...lobbiesArr]);
     });
-    socket.on("game-start", (upLobby) => {
-      setStartLobby(upLobby);
-      setState("game");
-      socket.emit("join-room", upLobby);
+    socket.on("game-start", (lobbiesArr, lobbyIndex) => {
+      if (lobbiesArr[lobbyIndex].users.some((user) => user.id === socket.id)) {
+        setStartLobby(lobbiesArr[lobbyIndex]);
+        setState("game");
+        socket.emit("join-room", lobbiesArr[lobbyIndex]);
+      } else {
+        setLobbies([...lobbiesArr]);
+      }
     });
-    socket.on("end-lobby", (lobby) => {
+    socket.on("end-game", (lobby) => {
       setState("lobby");
       socket.emit("leave-room", lobby);
     });
@@ -164,7 +168,8 @@ function App() {
               <div className="lobby-div">
                 <div className="lobby-top">
                   <h2>{lobby.name}</h2>
-                  {!userInLobby(index) && (
+                  {lobby.inGame && <h3>partita in corso</h3>}
+                  {!userInLobby(index) && !lobby.inGame && (
                     <button
                       className="join"
                       onClick={() => handleLobbyJoin(lobby.name)}
