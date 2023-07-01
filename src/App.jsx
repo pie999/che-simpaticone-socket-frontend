@@ -102,10 +102,14 @@ function App() {
     content = (
       <div className="name-div">
         <h1 className="name-title">Che Simpaticone!</h1>
+        <p className="sub-title">
+          v 1.2 by <a href="https://github.com/pie999">pie999</a>
+        </p>
         <form className="name-form" onSubmit={(e) => handleUsernameSubmit(e)}>
           <label htmlFor="username">nickname</label>
           <input
             id="username"
+            autoComplete="off"
             maxLength={15}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -136,6 +140,7 @@ function App() {
             <label htmlFor="lobby">nome lobby</label>
             <input
               id="lobby"
+              autoComplete="off"
               value={lobbyName}
               onChange={(e) => setLobbyName(e.target.value)}
             />
