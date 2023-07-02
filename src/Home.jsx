@@ -28,7 +28,10 @@ function Home({ users, lobbies, setLobbies }) {
     socket.on("lobby-exit", (lobbiesArr) => {
       setLobbies([...lobbiesArr]);
     });
-  });
+    socket.on("lobby-ended-game", (lobbiesArr) => {
+      setLobbies([...lobbiesArr]);
+    });
+  }, [setLobbies]);
 
   function handleLobbySubmit(e) {
     e.preventDefault();
