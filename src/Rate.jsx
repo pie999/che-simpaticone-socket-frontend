@@ -29,6 +29,11 @@ function Rate({ lobby }) {
   useEffect(() => {
     if (hasTimeoutElapsed) {
       if (votedIndex === undefined) {
+        if (lobby.users.length === 1) {
+          // edge case with only one player (otherwise getRandomNumberExcluding runs forever)
+          socket.emit("update-score", 0, lobby);
+          return;
+        }
         const myIndex = lobby.users.findIndex((u) => u.id === socket.id);
         const randomIndex = getRandomNumberExcluding(
           lobby.users.length,
