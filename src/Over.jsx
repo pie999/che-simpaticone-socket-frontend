@@ -16,7 +16,9 @@ function Over({ lobby }) {
         <>
           <button
             className="new-game"
-            onClick={() => socket.emit("game-start", lobby, lobby.totalRounds)}
+            onClick={() =>
+              socket.emit("game-start", lobby.name, lobby.totalRounds)
+            }
           >
             nuova partita
           </button>
