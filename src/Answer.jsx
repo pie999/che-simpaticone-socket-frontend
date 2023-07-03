@@ -21,7 +21,7 @@ function Answer({ lobby }) {
 
   useEffect(() => {
     if (hasTimeoutElapsed) {
-      socket.emit("submit-answer", answer, lobby);
+      socket.emit("submit-answer", answer, lobby.name);
       setHasTimeoutElapsed(false);
     }
   }, [hasTimeoutElapsed, answer, lobby]);

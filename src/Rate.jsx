@@ -31,7 +31,7 @@ function Rate({ lobby }) {
       if (votedIndex === undefined) {
         if (lobby.users.length === 1) {
           // edge case with only one player (otherwise getRandomNumberExcluding runs forever)
-          socket.emit("update-score", 0, lobby);
+          socket.emit("update-score", 0, lobby.name);
           return;
         }
         const myIndex = lobby.users.findIndex((u) => u.id === socket.id);
@@ -39,9 +39,9 @@ function Rate({ lobby }) {
           lobby.users.length,
           myIndex
         );
-        socket.emit("update-score", randomIndex, lobby);
+        socket.emit("update-score", randomIndex, lobby.name);
       } else {
-        socket.emit("update-score", votedIndex, lobby);
+        socket.emit("update-score", votedIndex, lobby.name);
       }
       setHasTimeoutElapsed(false);
     }

@@ -3,7 +3,7 @@ import { socket } from "../socket";
 
 function Reveal({ lobby }) {
   function handleNextRound() {
-    socket.emit("next-round", lobby);
+    socket.emit("next-round", lobby.name);
   }
 
   return (

@@ -22,7 +22,7 @@ function Over({ lobby }) {
           </button>
           <button
             className="exit"
-            onClick={() => socket.emit("end-game", lobby)}
+            onClick={() => socket.emit("end-game", lobby.name)}
           >
             esci
           </button>

@@ -19,18 +19,18 @@ function App() {
       setUsers([...usersArr]);
       setLobbies([...lobbiesArr]);
     });
-    socket.on("game-start", (lobbiesArr, lobbyIndex) => {
-      if (lobbiesArr[lobbyIndex].users.some((user) => user.id === socket.id)) {
-        setStartLobby(lobbiesArr[lobbyIndex]);
+    socket.on("game-start", (lobby, lobbiesArr) => {
+      if (lobby.users.some((user) => user.id === socket.id)) {
+        setStartLobby(lobby);
         setState("game");
-        socket.emit("join-room", lobbiesArr[lobbyIndex]);
+        socket.emit("join-room", lobby.name);
       } else {
         setLobbies([...lobbiesArr]);
       }
     });
-    socket.on("end-game", (lobby) => {
+    socket.on("end-game", (lobbyName) => {
       setState("home");
-      socket.emit("leave-room", lobby);
+      socket.emit("leave-room", lobbyName);
     });
     socket.on("user-disconnected", (usersArr, lobbiesArr) => {
       setUsers([...usersArr]);

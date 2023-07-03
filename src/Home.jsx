@@ -45,17 +45,17 @@ function Home({ users, lobbies, setLobbies }) {
     socket.emit("lobby-join", lobbyName, user);
   }
 
-  function handleLobbyExit(lobbyIndex) {
+  function handleLobbyExit(lobbyName) {
     setIsInLobby(false);
-    socket.emit("lobby-exit", lobbyIndex);
+    socket.emit("lobby-exit", lobbyName);
   }
 
   function userInLobby(lobbyIndex) {
     return lobbies[lobbyIndex].users.some((user) => user.id === socket.id);
   }
 
-  function handleGameStart(lobbyIndex) {
-    socket.emit("game-start", lobbies[lobbyIndex], numberOfRounds);
+  function handleGameStart(lobbyName) {
+    socket.emit("game-start", lobbyName, numberOfRounds);
   }
 
   return (
@@ -123,7 +123,7 @@ function Home({ users, lobbies, setLobbies }) {
                 {userInLobby(index) && (
                   <button
                     className="exit"
-                    onClick={() => handleLobbyExit(index)}
+                    onClick={() => handleLobbyExit(lobby.name)}
                   >
                     esci
                   </button>
@@ -139,7 +139,7 @@ function Home({ users, lobbies, setLobbies }) {
               {userInLobby(index) && lobby.ownerId === socket.id && (
                 <button
                   className="start"
-                  onClick={() => handleGameStart(index)}
+                  onClick={() => handleGameStart(lobby.name)}
                 >
                   inizia!
                 </button>
