@@ -27,7 +27,7 @@ function Game({ startLobby }) {
       setLobby(upLobby);
       setPhase("over");
     });
-    socket.on("game-start", (upLobby) => {
+    socket.on("new-game", (upLobby) => {
       setLobby(upLobby);
       setPhase("answer");
     });
