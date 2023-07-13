@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { socket } from "../socket";
 
-const audio_entrare = new Audio("src/audio/entrare.mp3");
+const audio_entrare = new Audio("audio/entrare.mp3");
 
 function Home({ users, lobbies, setLobbies }) {
   const [lobbyName, setLobbyName] = useState("");

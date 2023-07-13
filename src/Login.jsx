@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { socket } from "../socket";
 
-const audio_simpaticone = new Audio("src/audio/che-simpaticone.mp3");
+const audio_simpaticone = new Audio("audio/che-simpaticone.mp3");
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -34,7 +34,7 @@ function Login() {
       <p className="sub-sub-title">
         v 1.2 by <a href="https://github.com/pie999">pie999</a>
       </p>
-      <img src="./src/images/salvini-ride.png" alt="salvini ride" />
+      <img src="images/salvini-ride.png" alt="salvini ride" />
       <form className="name-form" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="username">NICKNAME</label>
         <input
