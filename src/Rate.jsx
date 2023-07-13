@@ -49,7 +49,7 @@ function Rate({ lobby }) {
 
   return (
     <div className="rate-div">
-      <p>tempo: {Math.round(time / 1000)}</p>
+      <p className="time">{Math.round(time / 1000)}</p>
       <h1>scegli la risposta più simpatica</h1>
       {lobby.users.map((u, i) => {
         if (u.id !== socket.id) {

@@ -46,7 +46,7 @@ function App() {
     content = <Game startLobby={startLobby} />;
   }
 
-  return <>{content}</>;
+  return <div className="app-container">{content}</div>;
 }
 
 export default App;

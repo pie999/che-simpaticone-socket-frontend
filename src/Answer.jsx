@@ -28,7 +28,7 @@ function Answer({ lobby }) {
 
   return (
     <div className="answer-div">
-      <p>tempo: {Math.round(time / 1000)}</p>
+      <p className="time">{Math.round(time / 1000)}</p>
       <h1 className="answer-prompt">{lobby.prompt}</h1>
       <textarea
         placeholder={lobby.letter}
